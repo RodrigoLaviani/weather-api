@@ -1,0 +1,121 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Weather API",
+      "description": "Backend where toy can check the weather of your city.",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      },
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/weather": {
+        "get": {
+          "tags": [
+            "Weather"
+          ],
+          "description": "Get weather from location and time",
+          "requestBody": {
+            "description": "Body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Body"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/LocationWeather"
+                      }
+                    }
+                }
+            }
+          },
+          "x-codegen-request-body-name": "body"
+        }
+      },
+      "/weather/nextRain": {
+        "get": {
+          "tags": [
+            "Weather"
+          ],
+          "description": "Get next rain from location and time",
+          "requestBody": {
+            "description": "Body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Body"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/NextRain"
+                      }
+                    }
+                }
+            }
+          },
+          "x-codegen-request-body-name": "body"
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Body": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "example":"New York"
+            },
+            "datetime": {
+              "type": "string",
+              "example": "2021-01-21T14:00:00.000Z"
+            }
+          }
+        },
+        "LocationWeather": {
+          "type": "object",
+          "properties": {
+            "location": {
+              "type": "string",
+              "example": "New York"
+            },
+            "temperature": {
+              "type": "string",
+              "example": "10 grados"  
+            },
+            "rain": {
+              "type": "string",
+              "example": "10%"
+            }
+          }
+        },
+        "NextRain": {
+          "type": "object",
+          "properties": {
+            "location": {
+                "type": "string",
+                "example": "New York"
+            },
+            "from": {
+              "type": "string",
+              "example": "14/11/2022 a las 16:30hs"
+            }
+          }
+        }
+      }
+    }
+  }
