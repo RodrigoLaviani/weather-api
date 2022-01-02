@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node ./dist/index",
-    "dev": "ts-node-dev --respawn src/index.ts -r",
+    "dev": "ts-node-dev --respawn index.ts -r --open",
     "test": "jest -u --collect-coverage --colors",
     "build": "tsc --sourceMap false",
     "insert-data": "ts-node-dev src/app/infrastructure/database/data/data-script.ts"
