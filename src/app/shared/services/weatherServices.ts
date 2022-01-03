@@ -3,6 +3,7 @@ import { Weather } from '../models/weather';
 import { getRangeDate, findWeatherByDate, getNearestDate } from '../helpers/dateHelper';
 import { locationFilter } from '../helpers/locationHelper';
 import { greaterChanceOfRain, getNextWeathersOfRain } from '../helpers/rainHelper';
+import cache from 'memory-cache';
 
 const getWeather = async (location: string, date: string) : Promise<Weather> => {
     const weathersSameLocation = await getWeatherWithLocation(location);
@@ -22,8 +23,15 @@ const getNextRain = async (location: string, date: string) : Promise<Weather> =>
 }
 
 const getWeatherWithLocation = async (location: string) : Promise<any> => {
-    const weathers = await getWeathers();
-    return weathers.filter((weather: Weather) => locationFilter(weather, location)).sort((a, b) => a.from.getTime() - b.from.getTime());
+    let weathers = cache.get('weathers');
+    if (!weathers) {
+        weathers = await getWeathers();
+        cache.put('weathers', weathers, 300000, function(key : string, value : Weather[]) {
+            console.log(key + ' did ' + value);
+        });
+    }
+
+    return weathers.filter((weather: Weather) => locationFilter(weather, location)).sort((a: Weather, b: Weather) => a.from.getTime() - b.from.getTime());
 }
 
 const getNearestWeather = (listWeather: Weather[], date: string) : Weather => {
