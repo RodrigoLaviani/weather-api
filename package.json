@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "Backend where you can check the weather of your city. ",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "node ./dist/index",
+    "start": "node ./dist/app.js",
     "dev": "ts-node-dev --respawn index.ts -r --open",
     "test": "jest -u --collect-coverage --colors",
     "build": "tsc --sourceMap false",
