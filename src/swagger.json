@@ -16,16 +16,26 @@
             "Weather"
           ],
           "description": "Get weather from location and time",
-          "requestBody": {
-            "description": "Body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Body"
-                }
+          "parameters": [
+            {
+              "name": "location",
+              "in": "query",
+              "description": "Weather location",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "datetime",
+              "in": "query",
+              "description": "Weather date",
+              "required": true,
+              "schema": {
+                "type": "string"
               }
             }
-          },
+          ],
           "responses": {
             "200": {
                 "content": {
@@ -46,16 +56,26 @@
             "Weather"
           ],
           "description": "Get next rain from location and time",
-          "requestBody": {
-            "description": "Body",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Body"
-                }
+          "parameters": [
+            {
+              "name": "location",
+              "in": "query",
+              "description": "Weather location",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "datetime",
+              "in": "query",
+              "description": "Weather date",
+              "required": true,
+              "schema": {
+                "type": "string"
               }
             }
-          },
+          ],
           "responses": {
             "200": {
                 "content": {
@@ -73,7 +93,7 @@
     },
     "components": {
       "schemas": {
-        "Body": {
+        "QueryParams": {
           "type": "object",
           "properties": {
             "location": {
@@ -99,7 +119,7 @@
             },
             "rain": {
               "type": "string",
-              "example": "10%"
+              "example": "10% de lluvia."
             }
           }
         },
