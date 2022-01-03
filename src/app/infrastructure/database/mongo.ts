@@ -8,5 +8,8 @@ export const initDatabaseConnection = (): any => {
         useCreateIndex: true
       })
       .then(() => console.log(`Connected to database`))
-      .catch(error => console.log(error))
+      .catch(error => { 
+        console.log(error)
+        throw error 
+      })
   }
