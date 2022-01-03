@@ -1,0 +1,19 @@
+config:
+  target: "http://localhost:8000"
+  phases:
+    - name: "100 Users in 10 Seconds"
+      duration: 10
+      arrivalRate: 100
+  tls:
+    rejectUnauthorized: false
+  rps.mean: true
+  processor: "./logger.js"
+scenarios:
+  - name: "Test get weather api"
+    flow:
+      - get:
+          url: "/weather?location=New%20York&datetime=2021-01-21T14%3A00%3A00.000Z"
+          expect:
+              statusCode: 200
+              hasProperty: results
+          afterResponse: "logRequestInfo"
